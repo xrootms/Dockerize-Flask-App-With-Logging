@@ -114,6 +114,24 @@ sudo systemctl start empapp
 sudo systemctl status empapp --no-pager
 ```
 
+### Varify
+
+```bash
+sudo netstat -tlnp | grep :5000
+ps aux | grep EmpApp.py
+
+sudo tail -f /var/log/empapp.log   $#View in Real-Time
+sudo tail -n 50 /var/log/empapp.log
+sudo grep -i error /var/log/empapp.log
+sudo grep "500" /var/log/empapp.log
+```
+
+**Stop**
+
+```bash
+sudo systemctl stop empapp
+sudo systemctl disable empapp
+```
 
 
 
