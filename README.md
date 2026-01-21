@@ -13,14 +13,14 @@ sudo apt install mysql-server mysql-client -y
 sudo systemctl start mysql
 
 sudo mysql -u root <<EOF
-CREATE USER IF NOT EXISTS 'admin'@'%' IDENTIFIED BY '@1111';
-GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%';
+CREATE USER IF NOT EXISTS 'apk'@'%' IDENTIFIED BY '@1111';
+GRANT ALL PRIVILEGES ON *.* TO 'apk'@'%';
 FLUSH PRIVILEGES;
 
 CREATE DATABASE IF NOT EXISTS employee;
-USE srlemployee;
+USE employee;
 
-CREATE TABLE IF NOT EXISTS employeetb (
+CREATE TABLE IF NOT EXISTS employee (
     empid VARCHAR(20),
     fname VARCHAR(20),
     lname VARCHAR(20),
@@ -36,8 +36,8 @@ sudo mysql -u root
 show databases;
 use employee;
 show tables;
-DESCRIBE employeetb;
-SELECT * FROM employeetb LIMIT 10;
+DESCRIBE employee;
+SELECT * FROM employee LIMIT 10;
 ```
 ---
 
