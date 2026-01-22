@@ -142,7 +142,8 @@ image<img src="./image/18499070.gif" alt="LEMP Diagram" width="200" align="right
 You can see the size of the Docker image has been reduced from 106MB to 19.8MB and it works properly without any issue.
 
 ---
- # Docker Log Management
+
+# Docker Log Management
 
 ### What is the CloudWatch Agent?
 The CloudWatch Agent is an official AWS service/daemon that runs on your server and can:
@@ -155,7 +156,7 @@ In Docker environments, it is often used to:
 -	Read container log files from: /var/lib/docker/containers/*/*-json.log
 -	Forward them to CloudWatch Logs
 
-### Step 1: Create IAM role
+## Step 1: Create IAM role
 Attach this policy to EC2: 
 
 **CloudWatchAgentServerPolicy**                          (EC2 role with CloudWatch permissions)
@@ -177,18 +178,18 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
 ```
 
 When asked:
-•	OS :> linux
-•	user :> root
-•	Logs :> yes
-•	Log file path :> /var/lib/docker/containers/*/*-json.log
-•	Log group :> docker-container-flask-logs
-•	Log stream :> {instance_id}
-•	Metrics :> yes (recommended)
+-	OS :> linux
+-	user :> root
+-	Logs :> yes
+-	Log file path :> /var/lib/docker/containers/*/*-json.log
+-	Log group :> docker-container-flask-logs
+-	Log stream :> {instance_id}
+-	Metrics :> yes (recommended)
 
 This creates a config file like:
-•	/opt/aws/amazon-cloudwatch-agent/bin/config.json
+-	/opt/aws/amazon-cloudwatch-agent/bin/config.json
 
-### Step 4: Start the agent
+## Step 4: Start the agent
 
 ```bash
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
@@ -204,7 +205,7 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
 sudo systemctl status amazon-cloudwatch-agent
 ```
 
-### Step 5: Verify
+## Step 5: Verify
 1.	Go to AWS Console :> CloudWatch → Logs
 2.	We will see log group:   (docker-container-flask-logs)
 3.	Logs update LIVE
