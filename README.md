@@ -1,8 +1,7 @@
 # ERMS-SRL
 Employee record management system (ERMS) built with Python-Flask and MySQL is a web-based application designed to efficiently manage and track employee data within an organization.
-
-
-## 1. Setup db:
+---
+## 1. Database Setup :
 $ nano setup_db.sh
 
 ```bash
@@ -40,8 +39,103 @@ DESCRIBE employee;
 SELECT * FROM employee LIMIT 10;
 ```
 ---
+## Task 2. Dockerize App Setup:
+### Step 1: Clone/Fork the repository to make use of it.
 
-## 2. Setup App:
+```bash
+git clone https://github.com/xrootms/ERMS-SRL.git
+
+cd ERMS-SRL
+cat EmpApp.py
+```
+
+### Step 2: Create a requirements.txt file in the project directory.
+    nano requirements.txt
+
+```bash
+flask
+pymysql
+boto3
+gunicorn
+cryptograph
+```
+Dockerfile explanation.
+cat Dockerfile
+
+1.	Python Slim                                                        # Its base image. Which is a minimal image.
+2.	ENV PYTHONDONTWRITEBYTECODE=1                                      # Smaller container size and Cleaner fs
+3.	ENV PYTHONUNBUFFERED=1                                             # Forces stdout/stderr streams to be unbuffered, Real- time logs
+4.	/app                                                               # Set the /app directory as the working directory.
+5.	&&                                                                 # Combining RUNs commands (which means smaller image.)
+6.	--no-install-recommends                                            # keeps the image smaller by avoiding extra suggested packages
+7.	rm -rf /var/lib/apt/lists/*                                        # To keep image size small: clean the apt cache in the same layer
+8.	python -m pip                                                      # use the correct pip for this Python (avoid mismatch)
+9.	--no-cache-dir                                                     # Pip will NOT save downloaded files in the cache, images smaller 
+10.	-r                                                                 # Tells pip to install dependencies from a file
+11.	CMD                                                                # Default command that runs when the container starts.
+12.	"--access-logfile", "-"                                            # Send access logs to stdout
+13.	"--error-logfile", "-"                                             # Send error logs to stderr
+14.	"EmpApp:app"                                                       # Import app object from EmpApp.py
+15.	 USER appuser                                                      # Run application as a non-root user called appuser.”
+
+
+**Build Docker Image**
+
+```bash
+docker build -t <image-name> .
+```
+**Run the Docker Image**
+```bash
+docker run -d -p 5000:5000  -- name <container-name>  <image-name> .
+```
+Now, check your application on the browser using <ip:5000>
+
+---
+## Optimizing Docker Images
+Optimizing Docker images is very important. We can use **SlimToolkit** to reduce the size of your  Docker image.
+  *Install SlimToolkit :*
+  
+```bash
+  curl -sL https://raw.githubusercontent.com/slimtoolkit/slim/master/scripts/install-slim.sh | sudo bash
+```
+
+Reload your shell & Verify:
+
+```bash
+exec bash
+slim –version
+```
+
+Create a File preserved-paths.txt  with the file name or file path you don’t want to get removed during the slim process.
+
+#nano preserved-paths.txt 
+
+```bash
+ /app
+/usr/local/bin/python3
+/usr/local/bin/flask
+```
+
+Run your command
+
+```bash
+slim build \
+  --http-probe=false \
+  --preserve-path-file preserved-paths.txt \
+  --tag slimmed-emp-srl04-flask-app \ 
+emp-srl04-flask-app
+```
+
+This command will slim the Docker images without affecting the file or file path mentioned in the txt file with a new name you specify in the --tag flag.
+
+**Now if you you check the docker image size, it will be considerably reduced as shown below.**
+
+image
+
+You can see the size of the Docker image has been reduced from 106MB to 19.8MB and it works properly without any issue.
+
+---
+## 2.2. Without Docker App Setup:
 $ nano setup_app.sh
 
 ```bash
