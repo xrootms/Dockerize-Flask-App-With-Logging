@@ -44,7 +44,7 @@ SELECT * FROM employee LIMIT 10;
 ### Step 1: Clone/Fork the repository to make use of it.
 
 ```bash
-git clone https://github.com/xrootms/https://github.com/xrootms/Dockerize-Flask-App-With-Logging-.git
+git clone https://github.com/xrootms/Dockerize-Flask-App-With-Logging.git
 
 cd Dockerize-Flask-App-With-Logging
 cat EmpApp.py
