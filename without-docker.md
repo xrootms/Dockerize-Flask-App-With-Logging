@@ -55,11 +55,11 @@ sudo apt-get install -y \
   python3-boto3 \
   git
 
-if [ -d "ERMS-SRL" ]; then cd ERMS-SRL
+if [ -d "Dockerize-Flask-App-With-Logging" ]; then cd Dockerize-Flask-App-With-Logging
   git pull
 else
-  git clone https://github.com/xrootms/ERMS-SRL.git
-  cd ERMS-SRL
+  git clone https://github.com/xrootms/Dockerize-Flask-App-With-Logging.git
+  cd Dockerize-Flask-App-With-Logging
 fi
 
 #edit port 5000, 
@@ -69,7 +69,7 @@ fi
 ### Option:a (testing)
 
 ```bash
-cd /home/ubuntu/ERMS-SRL
+cd /home/ubuntu/Dockerize-Flask-App-With-Logging
 sudo python3 EmpApp.py
 ```
 
@@ -90,8 +90,8 @@ After=network.target
 
 [Service]
 User=ubuntu
-WorkingDirectory=/home/ubuntu/ERMS-SRL
-ExecStart=/usr/bin/python3 /home/ubuntu/ERMS-SRL/EmpApp.py
+WorkingDirectory=/home/ubuntu/Dockerize-Flask-App-With-Logging
+ExecStart=/usr/bin/python3 /home/ubuntu/Dockerize-Flask-App-With-Logging/EmpApp.py
 Restart=always
 RestartSec=10
 StandardOutput=append:/var/log/empapp.log
