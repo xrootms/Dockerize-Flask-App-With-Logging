@@ -1,5 +1,29 @@
-Employee record management system (ERMS) built with Python-Flask and MySQL is a web-based application designed to efficiently manage and track employee data within an organization.
+# 🐳 Dockerizing a Flask Application with Logging & Optimization
 
+*This project demonstrates how to Dockerize a Python Flask application with production best practices, including secure containerization, logging, image optimization, and AWS CloudWatch integration.*
+
+ ## Application Overview
+
+- ERMS (Employee Record Management System) is a web-based application that allows organizations to:
+- Add and manage employee records
+- Store data securely in a MySQL database
+- Upload and retrieve employee-related assets
+- Monitor application behavior using centralized logging
+
+## Goal
+
+To build a secure, lightweight, and observable Flask application container and implement a real-world logging solution suitable for production and cloud environments.
+
+
+## Tech Stack
+
+- Python 3.11
+- Flask
+- MySQL
+- Docker & Gunicorn
+- AWS CloudWatch
+- SlimToolkit
+  
 ---
 
 ## *Task 1.* Database Setup :
